@@ -67,23 +67,43 @@ class PostWebController extends Controller
         return view('posts.edit', compact('post'));
     }
 
-    public function update(Request $request, Post $post)
-    {
-        $this->authorize('update', $post);
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
 
-        $post->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'slug' => \Illuminate\Support\Str::slug($request->title),
-        ]);
+     public function update(Request $request, Post $post)
+{
+    // Validação
+    $validated = $request->validate([
+        'title'   => 'required|string|max:255',
+        'content' => 'required|string',
+        'author'  => 'nullable|string|max:255',
+    ]);
 
-        return redirect()->route('posts.index')->with('success', 'Post atualizado com sucesso!');
+    // Gerar slug único (ignora o próprio post)
+    $slugBase = Str::slug($validated['title']);
+    $slug = $slugBase;
+    $count = 1;
+
+    while (
+        Post::where('slug', $slug)
+            ->where('id', '!=', $post->id) // ignora o post atual
+            ->exists()
+    ) {
+        $slug = $slugBase . '-' . $count;
+        $count++;
     }
+
+    // Atualizar o post
+    $post->update([
+        'title'   => $validated['title'],
+        'content' => $validated['content'],
+        'author'  => $validated['author'] ?? $post->author,
+        'slug'    => $slug,
+    ]);
+
+    return redirect()->route('posts.index')->with('success', 'Post atualizado com sucesso!');
+}
+	
+
 
     public function destroy(Post $post)
     {

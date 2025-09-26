@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Filiprint</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 {{-- Tailwind via Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -13,9 +13,9 @@
 
     <!-- Navbar -->
 
-<div class="bg-green-500 text-white p-4">
+<!--<div class="bg-green-500 text-white p-4">
     Se você está vendo este fundo verde, o Tailwind está funcionando ✅
-</div>
+</div>-->
 
 <nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
     <a href="{{ url('/') }}" class="font-bold text-xl text-green-600">FILIPRINT</a>
