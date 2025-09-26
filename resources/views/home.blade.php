@@ -24,9 +24,10 @@
                     </small>
 
                     <div class="mt-2">
-                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-secondary">
-                            Ver
-                        </a>
+                        <!--<a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-secondary">-->
+                         <a href="{{ route('posts.show', $post->slug) }}" class="btn btn-sm btn-secondary">Ver</a>
+
+                         
 
                         {{-- Se for o dono, mostra os botões --}}
                         @auth

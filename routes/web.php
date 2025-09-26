@@ -32,8 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}', [PostWebController::class, 'show'])->name('posts.show');
 });
 
-// Rota pública para exibir post individual
+/* Rota pública para exibir post individual
 Route::get('/posts/{id}', function ($id) {
     $post = Post::findOrFail($id);
     return view('post', compact('post'));
 })->name('posts.show');
+*/
+Route::get('/posts/{post:slug}', [PostWebController::class, 'show'])->name('posts.show');
